@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { StudentService } from './student.service';
+import {Component, OnInit} from '@angular/core';
+import {StudentService} from './services/domain/students-service/student.service';
+
 // import {ModalDirective} from 'angular-bootstrap-md';
 
 @Component({
@@ -24,8 +25,8 @@ export class AppComponent implements OnInit {
 
   deleteStudent(id) {
     /*
-    Complete this function to delete student and upon deletion of existing student based on the id of the student, 
-    It should prompt for a comfirmation for deletion and 
+    Complete this function to delete student and upon deletion of existing student based on the id of the student,
+    It should prompt for a comfirmation for deletion and
     the updated list should be reflected in the UI
     */
 
@@ -38,7 +39,7 @@ export class AppComponent implements OnInit {
     and upon addition of new student, he should be reflected in the UI
     */
 
-   
+
   }
 
 

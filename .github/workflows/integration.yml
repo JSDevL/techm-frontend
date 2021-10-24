@@ -1,8 +1,5 @@
 name: CI Angular app through Github Actions
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main

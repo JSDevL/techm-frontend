@@ -1,81 +1,46 @@
-<!-- <div>
-  <h1>fetch some data from API</h1>
-</div>
-
-<button (click)="fetchStudent()">Fetch Student</button>
-
-<ul>
-  <li *ngFor="let student of student$ | async">{{student.name}}</li>
-</ul>
-<ul>
-  <li *ngFor="let student of student$ | async">{{student.roll}}</li>
-</ul> -->
-
-
-
 <div class="center">
-
-
-  <div >
-    
-
+  <div>
     <div class="col-md-12">
-      <table  class="flat-table flat-table-1" style="margin-top: 20px;">
+      <table class="flat-table flat-table-1" style="margin-top: 20px;">
         <thead>
-          <tr>
-            <th scope="col">Student ID</th>
-            <th scope="col">Student Name</th>
-            <th scope="col">Student Roll</th>
-
- 
-            <th scope="col">Action</th>
-          </tr> 
+        <tr>
+          <th scope="col">Student ID</th>
+          <th scope="col">Student Name</th>
+          <th scope="col">Student Roll</th>
+          <th scope="col">Action</th>
+        </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let student of student$ | async">
-            <td>{{student.id}}</td>
-            <td>{{student.name}}</td>
-            <td>{{student.roll}}</td>
-         
-            <td>
-
-              <button (click)="deleteStudent(student.id)">Delete</button>
-            </td>
-          </tr>
+        <tr *ngFor="let student of student$ | async" class="student-row">
+          <td>{{student.id}}</td>
+          <td>{{student.name}}</td>
+          <td>{{student.roll}}</td>
+          <td>
+            <button (click)="deleteStudent(student.id)">Delete</button>
+          </td>
+        </tr>
         </tbody>
       </table>
     </div>
-    <!-- <a routerLink="/create">Click Here</a> -->
-
   </div>
-
-  
-
-
 </div>
 
 
 <div class="center">
-<form  #myForm="ngForm" (ngSubmit)="createStudent(user.name,user.roll)" class="form">
-  <div class="title">Registration</div>
-  <div class="subtitle">Register a new Student here</div>
-  <div class="input-container ic1">
-    <input id="name" [(ngModel)]="user.name" name="name" class="input" type="text" placeholder=" " />
-    <div class="cut"></div>
-    <label for="name"  class="placeholder">Name</label>
-  </div>
-  <div class="input-container ic2">
-    <input id="roll"  [(ngModel)]="user.roll" name="roll" class="input" type="text" placeholder=" " />
-    <div class="cut"></div>
-    <label for="roll"  class="placeholder">Roll</label>
-  </div>
+  <form (ngSubmit)="createStudent(user.name,user.roll)" class="form">
+    <div class="title">Registration</div>
+    <div class="subtitle">Register a new Student here</div>
+    <div class="input-container ic1">
+      <input [(ngModel)]="user.name" class="input" id="name" name="name" placeholder=" " type="text"/>
+      <div class="cut"></div>
+      <label class="placeholder" for="name">Name</label>
+    </div>
+    <div class="input-container ic2">
+      <input [(ngModel)]="user.roll" class="input" id="roll" name="roll" placeholder=" " type="text"/>
+      <div class="cut"></div>
+      <label class="placeholder" for="roll">Roll</label>
+    </div>
 
-  <button type="submit" [disabled]="!myForm.valid" type="text" class="submit">submit</button>
-</form>
+    <button [disabled]="!user.roll || !user.name" class="submit" type="submit">submit</button>
+  </form>
 </div>
-
-
-
-
-
-<router-outlet></router-outlet>

@@ -1,35 +1,34 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {BasePathProviderService, Service} from '../../core/base-path-provider/base-path-provider.service';
+import {Student} from '../../../domain/model/student';
+import {InjectionTokens} from '../../injection-tokens';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
+  private readonly basePath: string;
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    @Inject(InjectionTokens.BASE_PATH_PROVIDER_SERVICE) private basePathProviderService: BasePathProviderService
+  ) {
+    this.basePath = basePathProviderService.provide(Service.STUDENT_SERVICE);
   }
 
-  fetchStudent(): Observable<Object> {
-    return this.http.get('http://localhost:8000/api/v1/student');
+  fetchStudents(): Observable<Student[]> {
+    return this.http.get<Student[]>(`${this.basePath}/api/v1/students`);
   }
 
+  deleteStudent(id: number): Observable<undefined> {
+    return this.http.delete<undefined>(`${this.basePath}/api/v1/students/` + id);
+  }
 
-  deleteStudent(id): Observable<Object> {
-      return this.http.delete('http://localhost:8000/api/v1/student/' +id);
-    }
-
-
-
-    createStudent(nam,rol): Observable<Object>{
-      const newStudent = {
-          name:nam,
-          roll:rol
-      };
-
-      return this.http.post('http://localhost:8000/api/v1/student/' ,newStudent);
-    }
-
-
+  addStudent(name: string, roll: string): Observable<Student> {
+    const newStudent = {name, roll};
+    return this.http.post<Student>(`${this.basePath}/api/v1/students`, newStudent);
+  }
 }
 
